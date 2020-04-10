@@ -1,10 +1,8 @@
 <h2>All tracking data</h2>
 <ul class="dataset">
-  <li *ngFor="let data of dataset" 
-    [class.selected]="data === selectedData"
-    (click)="onSelect(data)">
-    <div><span class="badge">{{data.id}}</span> {{data.title}}</div>
+  <li *ngFor="let data of dataset">
+    <a routerLink="/detail/{{data.id}}">
+        <div><span class="badge">{{data.id}}</span> {{data.title}}</div>
+    </a>
   </li>
 </ul>
-
-<app-data-detail [data]="selectedData"></app-data-detail>

@@ -14,4 +14,7 @@ export class DataService {
   getDataset(): Observable<Data[]> {
     return of(DATASET);
   }
+  getData(id: number): Observable<Data> {
+    return of(DATASET.find(data => data.id === id));
+  }
 }
