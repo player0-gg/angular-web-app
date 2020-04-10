@@ -1,23 +1,10 @@
 <h2>Data set</h2>
 <ul class="dataset">
-  <li *ngFor="let data of dataset" (click)="onSelect(data)">
+  <li *ngFor="let data of dataset" 
+    [class.selected]="data === selectedData"
+    (click)="onSelect(data)">
     <div><span class="badge">{{data.id}}</span> {{data.title}}</div>
   </li>
 </ul>
 
-<div *ngIf="selectedData">
-    <h2>{{selectedData.title | uppercase}} Details</h2>
-    <div><span>id: </span>{{selectedData.id}}</div>
-    <div>
-      <label>title:
-        <input [(ngModel)]="selectedData.title" placeholder="title"/>
-      </label>
-    </div>
-    <div>
-      <label>comment:
-        <input [(ngModel)]="selectedData.comment" placeholder="comment"/>
-      </label>
-    </div>
-
-    <app-plotlygraph></app-plotlygraph>
-</div>
+<app-data-detail [data]="selectedData"></app-data-detail>

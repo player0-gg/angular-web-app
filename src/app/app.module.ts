@@ -8,6 +8,7 @@ import { DatasetComponent } from './dataset/dataset.component';
 import { PlotlygraphComponent } from './plotlygraph/plotlygraph.component';
 
 import { PlotlyViaCDNModule  } from 'angular-plotly.js';
+import { DataDetailComponent } from './data-detail/data-detail.component';
 PlotlyViaCDNModule.plotlyVersion = 'latest';
 PlotlyViaCDNModule.plotlyBundle = null;
 
@@ -15,7 +16,8 @@ PlotlyViaCDNModule.plotlyBundle = null;
   declarations: [
     AppComponent,
     DatasetComponent,
-    PlotlygraphComponent
+    PlotlygraphComponent,
+    DataDetailComponent
   ],
   imports: [
     BrowserModule,

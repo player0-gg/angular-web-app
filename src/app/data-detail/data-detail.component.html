@@ -1,0 +1,17 @@
+<div *ngIf="data">
+
+    <h2>{{data.title | uppercase}} Details</h2>
+    <div><span>id: </span>{{data.id}}</div>
+    <div>
+      <label>title:
+        <input [(ngModel)]="data.title" placeholder="title"/>
+      </label>
+    </div>
+    <div>
+      <label>comment:
+        <input [(ngModel)]="data.comment" placeholder="comment"/>
+      </label>
+    </div>
+  
+    <app-plotlygraph></app-plotlygraph>
+  </div>
