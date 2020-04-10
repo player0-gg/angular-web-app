@@ -9,6 +9,9 @@ import { PlotlygraphComponent } from './plotlygraph/plotlygraph.component';
 
 import { PlotlyViaCDNModule  } from 'angular-plotly.js';
 import { DataDetailComponent } from './data-detail/data-detail.component';
+import { FileSelectDirective, FileDropDirective, FileUploader } from 'ng2-file-upload/ng2-file-upload';
+import { FileUploadComponent } from './file-upload/file-upload.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 PlotlyViaCDNModule.plotlyVersion = 'latest';
 PlotlyViaCDNModule.plotlyBundle = null;
 
@@ -17,13 +20,15 @@ PlotlyViaCDNModule.plotlyBundle = null;
     AppComponent,
     DatasetComponent,
     PlotlygraphComponent,
-    DataDetailComponent
+    DataDetailComponent,
+    FileUploadComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    PlotlyViaCDNModule
+    PlotlyViaCDNModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
