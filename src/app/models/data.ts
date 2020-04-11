@@ -3,5 +3,4 @@ export interface Data {
     title: string;
     content: string;
     comment?: string;
-    file_path?: string;
 }
