@@ -1,5 +1,5 @@
 export interface Data {
-    id?: any;
+    id: number;
     title: string;
     content: string;
     comment?: string;
