@@ -1,12 +1,20 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 
-import { Observable, of } from 'rxjs';
+import { Observable, of, EMPTY } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { Data } from './models/data';
 
 import { MessageService } from './message.service';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Access-Control-Allow-Origin': '*',
+    Authorization: 'authkey',
+    userid: '1'
+  })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -18,24 +26,46 @@ export class FlaskService {
     private messageService: MessageService) { }
 
   public getUploadedDataById(id: number) {
-    return this.httpClient.get<Data>(this.SERVER + 'uploaded_data/1');
+    return this.httpClient.get<Data>(this.SERVER + 'uploaded_data/' + id);
   }
 
   public getUploadedDataOverview(): Observable<Data[]> {
-    this.messageService.add('FlaskService: fetched heroes');
+    this.log('fetched heroes');
     return this.httpClient.get<Data[]>(this.SERVER + 'uploaded_data')
       .pipe(
         catchError(this.handleError<Data[]>('getUploadedDataOverview', []))
       );
   }
 
-  public sendFormData(formData) {
-    this.messageService.add('FlaskService: sendFormData');
-    return this.httpClient.post<any>(this.SERVER + 'uploaded_data', formData, {
+  public uploadData(formData: FormData) {
+    return this.post(formData, 'upload');
+  }
+
+  public updateData(formData: FormData) {
+    return this.post(formData, 'update');
+  }
+
+  public removeData(formData: FormData) {
+    return this.post(formData, 'remove');
+  }
+
+  private post<T>(formData: FormData, route: string) {
+    this.log('FlaskService: post for route ' + route);
+    // return this.httpClient.post<T>(this.SERVER + route, formData, httpOptions);
+
+    return this.httpClient.post<T>(this.SERVER + route, formData, {
       reportProgress: true,
       observe: 'events'
     });
   }
+
+  // private get<T>(route: string) {
+  //   this.log('FlaskService: get for route ' + route);
+  //   return this.httpClient.get<T>(this.SERVER + route)
+  //   .pipe(
+  //     catchError(this.handleError<T>('getUploadedDataOverview', EMPTY))
+  //   );
+  // }
 
   /**
    * Handle Http operation that failed.
@@ -58,6 +88,7 @@ export class FlaskService {
   }
   /** Log a HeroService message with the MessageService */
   private log(message: string) {
+    console.log('FlaskService: ' + message);
     this.messageService.add('FlaskService: ' + message);
   }
 }

@@ -11,7 +11,13 @@
       <input [(ngModel)]="data.comment" placeholder="comment"/>
     </label>
   </div>
+  <button (click)="update()">update</button>
+  <button class="delete" (click)="removeData(data.id)">Delete track</button>
 
   <app-plotlygraph></app-plotlygraph>
   <button (click)="goBack()">go back</button>
+  <div *ngIf="busy" class="processing">
+    <p>Processing request, please stand by, you will be redirected soon...</p>
+    <div class="loader">Loading...</div>
+  </div>
 </div>

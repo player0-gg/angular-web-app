@@ -1,9 +1,17 @@
 import { Component, OnInit, ViewChild, ElementRef  } from '@angular/core';
-import { HttpEventType, HttpErrorResponse } from '@angular/common/http';
-import { of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
-import { FlaskService } from '../flask.service';
+
+import { DataService } from '../data.service';
 import { MessageService } from '../message.service';
+
+/*
+example:
+https://medium.com/techiediaries-com/uploading-files-with-formdata-and-post-requests-using-angular-9-httpclient-762d804dd68c
+*/
+export interface FileUploadConfig {
+  data?: any;
+  inProgress: boolean;
+  progress: number;
+}
 
 @Component({
   selector: 'app-file-upload',
@@ -12,40 +20,47 @@ import { MessageService } from '../message.service';
 })
 export class FileUploadComponent implements OnInit {
   @ViewChild('fileUpload', {static: false}) fileUpload: ElementRef;
-  files  = [];
-  constructor(private flaskService: FlaskService, private messageService: MessageService) { }
+  files = [];
+  constructor(private dataService: DataService, private messageService: MessageService) { }
 
   ngOnInit(): void {
   }
 
-  sendFile(file) {
+  send(fileUploadConfig: FileUploadConfig) {
+    this.log('sending file ' + fileUploadConfig.data.name);
     const formData = new FormData();
-    formData.append('file', file.data);
-    file.inProgress = true;
-    this.flaskService.sendFormData(formData).subscribe((event: any) => {
+    formData.append('file', fileUploadConfig.data);
+    fileUploadConfig.inProgress = true;
+    this.dataService.uploadData(formData).subscribe((event: any) => {
         if (typeof (event) === 'object') {
           console.log(event.body);
-          this.messageService.add(event.body);
         }
       });
   }
-  private sendFiles() {
+  private uploadFiles() {
+    this.log('uploadFiles');
     this.fileUpload.nativeElement.value = '';
     this.files.forEach(file => {
-      this.sendFile(file);
+      this.send(file);
     });
   }
   onClick() {
+    this.log('onClick');
     const fileUpload = this.fileUpload.nativeElement;
     fileUpload.onchange = () => {
-      for (const file in fileUpload.files.length) {
+      this.log('fileUpload.onchange');
+      for (const file in fileUpload.files) {
         if (file) {
-          this.files.push({ data: file, inProgress: false, progress: 0});
+          const fileConfig = { data: file, inProgress: false, progress: 0};
+          this.files.push(fileConfig);
         }
       }
-      this.sendFiles();
+      this.uploadFiles();
     };
     fileUpload.click();
   }
 
+  private log(message: string) {
+    console.log('FileUploadComponent: ' + message);
+  }
 }

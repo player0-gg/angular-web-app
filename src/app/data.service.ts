@@ -15,11 +15,22 @@ export class DataService {
 
   getDataset(): Observable<Data[]> {
     this.messageService.add('DataService: fetched data');
-    return of(DATASET);
-    // return this.flask.getUploadedDataOverview();
+    return this.flask.getUploadedDataOverview();
   }
 
   getData(id: number): Observable<Data> {
-    return of(DATASET.find(data => data.id === id));
+    return this.flask.getUploadedDataById(id);
+  }
+
+  uploadData(formData: FormData) {
+    return this.flask.uploadData(formData);
+  }
+
+  updateData(formData: FormData) {
+    return this.flask.updateData(formData);
+  }
+
+  removeData(formData: FormData) {
+    return this.flask.removeData(formData);
   }
 }
