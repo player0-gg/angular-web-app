@@ -26,7 +26,7 @@ export class FileUploadComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  send(fileUploadConfig: FileUploadConfig) {
+  upload(fileUploadConfig: FileUploadConfig) {
     this.log('sending file ' + fileUploadConfig.data.name);
     const formData = new FormData();
     formData.append('file', fileUploadConfig.data);
@@ -41,7 +41,7 @@ export class FileUploadComponent implements OnInit {
     this.log('uploadFiles');
     this.fileUpload.nativeElement.value = '';
     this.files.forEach(file => {
-      this.send(file);
+      this.upload(file);
     });
   }
   onClick() {
