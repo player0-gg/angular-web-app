@@ -28,6 +28,14 @@ export class FlaskService {
         catchError(this.handleError<Data[]>('getUploadedDataOverview', []))
       );
   }
+
+  public sendFormData(formData) {
+    return this.httpClient.post<any>(this.SERVER + 'uploaded_data', formData, {
+      reportProgress: true,
+      observe: 'events'
+    });
+  }
+
   /**
    * Handle Http operation that failed.
    * Let the app continue.

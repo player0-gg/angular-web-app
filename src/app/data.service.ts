@@ -14,7 +14,7 @@ export class DataService {
   constructor(private messageService: MessageService, private flask: FlaskService) { }
 
   getDataset(): Observable<Data[]> {
-    this.messageService.add('HeroService: fetched heroes');
+    this.messageService.add('DataService: fetched data');
     return of(DATASET);
     // return this.flask.getUploadedDataOverview();
   }
