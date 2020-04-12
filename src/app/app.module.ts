@@ -18,6 +18,9 @@ PlotlyViaCDNModule.plotlyBundle = null;
 
 import { FlaskService } from './flask.service';
 import { MessagesComponent } from './messages/messages.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { ConfirmationDialogService } from './confirmation-dialog/confirmation-dialog.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,8 @@ import { MessagesComponent } from './messages/messages.component';
     PlotlygraphComponent,
     DataDetailComponent,
     FileUploadComponent,
-    MessagesComponent
+    MessagesComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     HttpClientModule,
@@ -34,11 +38,14 @@ import { MessagesComponent } from './messages/messages.component';
     AppRoutingModule,
     FormsModule,
     PlotlyViaCDNModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgbModule,
   ],
   providers: [
-    FlaskService
+    FlaskService,
+    ConfirmationDialogService,
   ],
+  entryComponents: [ ConfirmationDialogComponent ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -12,7 +12,7 @@
     </label>
   </div>
   <button (click)="update()">update</button>
-  <button class="delete" (click)="removeData(data.id)">Delete track</button>
+  <button (click)="openConfirmationDialog(data.id)" type="button" class="btn btn-primary">Delete</button>
 
   <app-plotlygraph></app-plotlygraph>
   <button (click)="goBack()">go back</button>

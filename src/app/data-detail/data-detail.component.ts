@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 
 import { Data } from '../models/data';
 import { DataService } from '../data.service';
+import { ConfirmationDialogService } from '../confirmation-dialog/confirmation-dialog.service';
 
 @Component({
   selector: 'app-data-detail',
@@ -19,6 +20,7 @@ export class DataDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private dataService: DataService,
     private router: Router,
+    private confirmationDialogService: ConfirmationDialogService,
     private location: Location
   ) { }
 
@@ -50,15 +52,25 @@ export class DataDetailComponent implements OnInit {
     });
   }
 
-  removeData(id: number): void {
-    // TODO: show a confirm pop up before
+  public openConfirmationDialog(id: number) {
+    this.confirmationDialogService.confirm('Please confirm..', 'Do you really want to remove this track?')
+    .then((confirmed) => {
+      this.log('User confirmed: ' + confirmed);
+      if (confirmed) {
+        this.removeData(id);
+      }
+    })
+    .catch(() => this.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
+  }
+
+  private removeData(id: number): void {
     this.busy = true;
     this.log('removeData ' + id);
     const formData = new FormData();
     formData.append('id', this.data.id.toString());
     this.dataService.removeData(formData).subscribe(res => {
       this.busy = false;
-      this.log('removeData done');
+      this.log('removeData done' + id);
       this.router.navigate(['/overview']);
     });
   }
