@@ -30,6 +30,7 @@ export class FlaskService {
   }
 
   public sendFormData(formData) {
+    this.messageService.add('FlaskService: sendFormData');
     return this.httpClient.post<any>(this.SERVER + 'uploaded_data', formData, {
       reportProgress: true,
       observe: 'events'
@@ -49,7 +50,7 @@ export class FlaskService {
       console.error(error); // log to console instead
 
       // TODO: better job of transforming error for user consumption
-      this.log('${operation} failed: ${error.message}');
+      this.log(operation + ' failed: err_msg = ' + error.message);
 
       // Let the app keep running by returning an empty result.
       return of(result as T);
@@ -57,6 +58,6 @@ export class FlaskService {
   }
   /** Log a HeroService message with the MessageService */
   private log(message: string) {
-    this.messageService.add('FlaskService: ${message}');
+    this.messageService.add('FlaskService: ' + message);
   }
 }
