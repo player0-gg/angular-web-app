@@ -46,7 +46,7 @@ export class FlaskService {
   }
 
   public removeData(formData: FormData) {
-    return this.post(formData, 'remove');
+    return this.post(formData, 'remove/' + formData.get('id'));
   }
 
   private post<T>(formData: FormData, route: string) {

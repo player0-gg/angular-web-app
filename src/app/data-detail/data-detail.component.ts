@@ -42,7 +42,7 @@ export class DataDetailComponent implements OnInit {
     this.busy = true;
     this.log('update initiated');
     const formData = new FormData();
-    formData.append('id', this.data.id.toString());
+    formData.append('tracking_id', this.data.id.toString());
     formData.append('title', this.data.title);
     formData.append('comment', this.data.comment);
     this.dataService.updateData(formData).subscribe(res => {

@@ -40,10 +40,11 @@ export class FileUploadComponent implements OnInit {
   private uploadFiles() {
     this.log('uploadFiles');
     this.fileUpload.nativeElement.value = '';
-    this.files.forEach(file => {
-      this.upload(file);
+    this.files.forEach(fileUploadConfig => {
+      this.upload(fileUploadConfig);
     });
   }
+
   onClick() {
     this.log('onClick');
     const fileUpload = this.fileUpload.nativeElement;
