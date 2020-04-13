@@ -14,7 +14,7 @@
   <button (click)="update()">update</button>
   <button (click)="openConfirmationDialog(data.id)" type="button" class="btn btn-primary">Delete</button>
 
-  <app-plotlygraph></app-plotlygraph>
+  <app-plotlygraph *ngIf="data.content" [visualData]="data.content"></app-plotlygraph>
   <button (click)="goBack()">go back</button>
   <div *ngIf="busy" class="processing">
     <p>Processing request, please stand by, you will be redirected soon...</p>
