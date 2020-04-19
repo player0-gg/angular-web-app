@@ -50,7 +50,7 @@ export class FileUploadComponent implements OnInit {
     const fileUpload = this.fileUpload.nativeElement;
     fileUpload.onchange = () => {
       this.log('fileUpload.onchange');
-      for (const file in fileUpload.files) {
+      for (const file of fileUpload.files) {
         if (file) {
           const fileConfig = { data: file, inProgress: false, progress: 0};
           this.files.push(fileConfig);
