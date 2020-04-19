@@ -27,6 +27,9 @@ export class DatasetComponent implements OnInit {
 
   getDataset(): void {
     this.dataService.getDataset()
-      .subscribe(dataset => this.dataset = dataset);
+      .subscribe(dataset => {
+        this.dataset = dataset;
+        console.log(this.dataset);
+      });
   }
 }

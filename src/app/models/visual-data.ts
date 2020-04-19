@@ -44,5 +44,5 @@ export interface VisualTrack {
 }
 
 export interface VisualData {
-    tracks: VisualTrack[];
+    tracks: Array<VisualTrack>;
 }
