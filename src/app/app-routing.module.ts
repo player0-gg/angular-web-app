@@ -9,7 +9,8 @@ const routes: Routes = [
   { path: '', redirectTo: '/overview', pathMatch: 'full' },
   { path: 'overview', component: DatasetComponent },
   { path: 'upload', component: FileUploadComponent },
-  { path: 'detail/:id', component: DataDetailComponent }
+  { path: 'detail/:id', component: DataDetailComponent },
+  { path: 'auth', loadChildren: './auth/auth.module#AuthModule' },
 ];
 
 @NgModule({

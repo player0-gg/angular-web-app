@@ -22,6 +22,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { ConfirmationDialogService } from './confirmation-dialog/confirmation-dialog.service';
 
+import { AuthModule } from './auth/auth.module';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +41,7 @@ import { ConfirmationDialogService } from './confirmation-dialog/confirmation-di
     FormsModule,
     PlotlyViaCDNModule,
     BrowserAnimationsModule,
+    AuthModule,
     NgbModule,
   ],
   providers: [
