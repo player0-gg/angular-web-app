@@ -2,6 +2,9 @@
 <nav>
     <a routerLink="/overview">Workspace</a>
     <a routerLink="/upload">Upload data</a>
+    <div *ngIf="isLoggedIn()">
+        <button (click)="logout()">Logout</button>
+    </div>
 </nav>
 <router-outlet></router-outlet>
 <app-messages></app-messages>
